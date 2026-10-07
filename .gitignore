@@ -1,0 +1,16 @@
+# Node
+node_modules/
+app/dist/
+app/.vite/
+npm-debug.log*
+
+# Tauri / Rust
+app/src-tauri/target/
+app/src-tauri/gen/
+
+# Test output
+app/tests/out/
+
+# OS
+.DS_Store
+Thumbs.db
