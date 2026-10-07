@@ -53,7 +53,11 @@ Keyboard: hold `\` to compare with the original, `z` toggles Fit / 1:1,
 
 ### Editor app
 
-Prebuilt bundles are not published yet. To build one:
+Download the bundle for your platform from the
+[releases page](https://github.com/FlyingKangeroo/Halation/releases)
+(`.dmg` for macOS, `.msi` or `.exe` for Windows). Bundles are not signed
+yet, so macOS needs a right-click ▸ *Open* the first time. To build one
+yourself:
 
 ```sh
 cd app
@@ -122,14 +126,24 @@ app/src-tauri/              Tauri v2 shell: CLI args, file system and dialog plu
 
 - Lightroom Classic only. Lightroom (cloud) has no plug-in API; its
   *Edit In* menu can only launch apps registered as external editors.
-- The Tauri shell has not yet been compiled in CI (this repository was
-  bootstrapped in a Linux container without WebKitGTK). The frontend, the
-  shader pipeline, the TIFF codec and the Lightroom hand-off format are
-  tested; the first desktop build may need small fixes in
-  `app/src-tauri/`.
+- The Tauri shell is compiled by the release workflow
+  (`.github/workflows/release.yml`) on macOS and Windows; it has not yet
+  been run on a developer machine. The frontend, the shader pipeline, the
+  TIFF codec and the Lightroom hand-off format are tested.
 - Icons are placeholders.
 - Images wider or taller than the GPU's maximum texture size (usually
   16384 px) are rejected with a message rather than tiled.
+
+## Releasing
+
+Pushing a `v*` tag runs the release workflow, which zips the plug-in,
+builds the desktop app for macOS (Apple silicon and Intel) and Windows,
+and attaches everything to a GitHub release. Notes are taken from
+`docs/releases/<tag>.md` when that file exists.
+
+```sh
+git tag v0.1.0 && git push origin v0.1.0
+```
 
 ## License
 
